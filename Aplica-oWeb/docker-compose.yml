@@ -1,0 +1,39 @@
+
+
+services:
+  db:
+    build: ./PostgreSQL
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: satisfacao
+    ports:
+      - "5432:5432"
+    networks:
+      - sistema-network
+
+  mongo:
+    build: ./MongoDB
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - sistema-network
+
+  node:
+    build: ./Node-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - mongo
+    networks:
+      - sistema-network
+    volumes:
+      - ./Node-app:/app
+
+networks:
+  sistema-network:
+    driver: bridge
