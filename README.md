@@ -1,4 +1,4 @@
-# **README.md (Projeto Docker - MongoDB, PostgreSQL e Node.js)**
+# **Aplica-oWeb (Projeto Docker - MongoDB, PostgreSQL e Node.js)**
 
 Este repositório contém a configuração de um ambiente Docker para rodar os serviços **MongoDB**, **PostgreSQL** e **Node.js**. O objetivo deste projeto é fornecer uma maneira simples e eficiente de rodar esses três serviços em containers Docker, com a capacidade de configurar credenciais administrativas e bancos de dados iniciais durante a criação dos containers.
 
