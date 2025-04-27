@@ -1,64 +1,22 @@
-# Sistema de Pesquisa de Satisfação - Ambiente Dockerizado
+# **Aplica-oWeb (Projeto Docker - MongoDB, PostgreSQL e Node.js)**
 
-Bem-vindo ao repositório do Sistema de Pesquisa de Satisfação! Este projeto tem como objetivo fornecer um ambiente web para a coleta de dados sobre a satisfação dos alunos no curso de **Análise e Desenvolvimento de Sistemas**. Tudo isso em um ambiente Dockerizado, facilitando a configuração e a escalabilidade.
+Este repositório contém a configuração de um ambiente Docker para rodar os serviços **MongoDB**, **PostgreSQL** e **Node.js**. O objetivo deste projeto é fornecer uma maneira simples e eficiente de rodar esses três serviços em containers Docker, com a capacidade de configurar credenciais administrativas e bancos de dados iniciais durante a criação dos containers.
 
-O sistema é composto por três serviços principais que rodam em containers separados:
+A configuração é feita por meio de **Dockerfiles** para cada serviço e um arquivo **docker-compose.yml** que orquestra os containers, garantindo um ambiente consistente e facilmente replicável em diferentes máquinas e plataformas.
 
-- **PostgreSQL**: Banco de dados relacional para armazenar dados estruturados.
-- **MongoDB**: Banco de dados NoSQL para dados mais flexíveis e não estruturados.
-- **Node.js**: Aplicação backend responsável pela coleta e processamento de dados.
+## 🛠️ Tecnologias e Ferramentas
 
-## Arquitetura
+- **Docker**: Utilizado para containerizar os serviços, garantindo que o ambiente de execução seja isolado e idêntico em qualquer máquina.
+- **Docker Compose**: Ferramenta para orquestrar múltiplos containers Docker, facilitando a configuração e execução de múltiplos serviços.
+- **MongoDB**: Banco de dados NoSQL de código aberto utilizado para armazenar dados não-relacionais.
+- **PostgreSQL**: Banco de dados relacional de código aberto utilizado para armazenar dados estruturados e permitir consultas SQL.
+- **Node.js**: Ambiente de execução JavaScript do lado do servidor, usado para rodar a aplicação web.
 
-O sistema está estruturado de forma a garantir uma boa separação de responsabilidades. Os containers Docker se comunicam entre si em uma rede interna, permitindo um ambiente de desenvolvimento eficiente e isolado.
+## 🚀 Como rodar o projeto
 
-1. **Container PostgreSQL**: Responsável por armazenar dados estruturados, como respostas a pesquisas.
-2. **Container MongoDB**: Armazena dados não estruturados ou mais flexíveis, como logs ou informações adicionais.
-3. **Container Node.js**: Serve como backend, processando os dados coletados e interagindo com os bancos de dados.
+### Pré-requisitos
 
-## Funcionalidade
-
-A principal funcionalidade desse sistema é a coleta de feedback dos alunos sobre a experiência deles no curso de **Análise e Desenvolvimento de Sistemas**. A pesquisa abrange avaliações de disciplinas, professores, infraestrutura, entre outros aspectos.
-
-- **PostgreSQL** é utilizado para armazenar dados estruturados, como respostas às pesquisas.
-- **MongoDB** armazena dados mais flexíveis ou registros extras.
-- **Node.js** facilita a interação entre os dois bancos de dados e disponibiliza uma API para comunicação com o frontend.
-
-## Serviços
-
-### 1. **PostgreSQL**
-
-O banco de dados PostgreSQL é configurado com as seguintes variáveis de ambiente:
-
-- `POSTGRES_USER`: Usuário do banco de dados (padrão: admin)
-- `POSTGRES_PASSWORD`: Senha do banco de dados (padrão: admin)
-- `POSTGRES_DB`: Nome do banco de dados (padrão: pesquisa_satisfacao)
-
-O PostgreSQL fica acessível na porta `5432`.
-
-### 2. **MongoDB**
-
-O MongoDB é configurado para inicializar um usuário administrador com as seguintes variáveis:
-
-- `MONGO_INITDB_ROOT_USERNAME`: Usuário administrador (padrão: admin)
-- `MONGO_INITDB_ROOT_PASSWORD`: Senha do administrador (padrão: admin)
-
-Ele fica acessível na porta `27017`.
-
-### 3. **Node.js**
-
-A aplicação Node.js está configurada para a versão 22 do Node.js. Ela se conecta aos dois bancos de dados, PostgreSQL e MongoDB, para processar e armazenar os dados de forma eficiente.
-
-A aplicação backend pode ser acessada na porta `3000`.
-
-## 🔧 Pré-requisitos
-
-Antes de começar, você precisa garantir que tem o Docker e o Docker Compose instalados na sua máquina.
-
-- **Docker**: [Como instalar o Docker](https://docs.docker.com/get-docker/)
-- **Docker Compose**: [Como instalar o Docker Compose](https://docs.docker.com/compose/install/)
-
-Verifique se está tudo funcionando com os seguintes comandos:
+Antes de começar, você precisa ter o **Docker** e o **Docker Compose** instalados em sua máquina. Você pode verificar se o Docker está instalado corretamente com os seguintes comandos:
 
 ```bash
 docker --version
@@ -66,79 +24,177 @@ docker --version
 docker-compose --version
 ```
 
-#### 1. Clonar o Repositório
-Clone o repositório para sua máquina:
+Caso o Docker não esteja instalado, siga as instruções para instalação na documentação oficial:
+
+- [Instalar Docker](https://docs.docker.com/get-docker/)
+- [Instalar Docker Compose](https://docs.docker.com/compose/install/)
+
+## Passos para executar o projeto
+
+### 1. **Clone o repositório** para sua máquina local:
 
 ```bash
-git clone https://github.com/seu-usuario/sistema-pesquisa-satisfacao.git
+git clone https://github.com/seu-usuario/Projeto-Docker-MongoDB-PostgreSQL-Node.git
 
-cd sistema-pesquisa-satisfacao
+cd Projeto-Docker-MongoDB-PostgreSQL-Node
 ```
 
-#### 2. Subir os Containers
-Para iniciar os containers Docker, rode o comando:
+### 2. **Construa e inicie os containers** com o Docker Compose:
 
 ```bash
 docker-compose up --build
 ```
 
-Este comando irá construir as imagens e iniciar os containers dos serviços.
+Esse comando vai construir as imagens Docker a partir dos `Dockerfile`s em cada diretório e iniciar os containers dos serviços.
 
-#### 3. Acessar os Serviços
-Depois que os containers estiverem rodando, você pode acessar os serviços nos seguintes endereços:
+### 3. **Acesse os serviços**:
 
-Backend (Node.js): http://localhost:3000
+- O **Node.js** estará rodando na porta `3000`, e você pode acessar a aplicação web através de `http://localhost:3000`.
+- O **MongoDB** estará rodando na porta `27017`, e você pode conectar-se a ele com as credenciais definidas no `docker-compose.yml`.
+- O **PostgreSQL** estará rodando na porta `5432`, e você pode conectar-se a ele com as credenciais definidas no `docker-compose.yml`.
 
-PostgreSQL: localhost:5432
+### 4. **Parar os containers**:
 
-Usuário: admin
-
-Senha: admin
-
-Banco: pesquisa_satisfacao
-
-MongoDB: localhost:27017
-
-Usuário: admin
-
-Senha: admin
-
-### 4. Verificar os Logs
-Se quiser ver os logs em tempo real dos containers, use o comando:
+Se você precisar parar os containers, basta executar o seguinte comando:
 
 ```bash
-docker-compose logs -f
+docker-compose down
 ```
 
-Estrutura do Projeto
-Aqui está a estrutura de diretórios e arquivos do projeto:
+---
 
-```bash
-sistema-pesquisa-satisfacao/
-├── node-app/
-│   └── Dockerfile               
-├── postgres/
-│   └── Dockerfile               
-├── mongodb/
-│   └── Dockerfile               
-├── docker-compose.yml           
-└── README.md                    
+## 🧩 Estrutura do Projeto
+
+O projeto é composto pelos seguintes diretórios e arquivos:
+
+```plaintext
+Projeto-Docker-MongoDB-PostgreSQL-Node/
+│
+├── MongoDB/             # Dockerfile para o MongoDB
+│   └── Dockerfile
+│
+├── Node-app/            # Dockerfile para a aplicação Node.js
+│   └── Dockerfile
+│
+├── PostgreSQL/          # Dockerfile para o PostgreSQL
+│   └── Dockerfile
+│
+├── docker-compose.yml   # Arquivo de orquestração dos containers
+└── README.md            # Documentação do projeto
 ```
 
-Descrição dos Arquivos
-Dockerfiles: Contêm as instruções para construir os containers de cada serviço.
+---
 
-docker-compose.yml: Arquivo que orquestra os containers, configura redes, volumes e dependências.
+## ⚙️ Detalhes de cada serviço
 
-README.md: Documento que explica como rodar e entender o sistema.
+### MongoDB
 
-### Desenvolvimento
-Se você deseja contribuir com melhorias ou testar o projeto localmente, basta seguir as instruções para rodar os containers. Caso queira rodar a aplicação fora do Docker, faça o seguinte:
+O MongoDB é um banco de dados NoSQL utilizado para armazenar dados não-relacionais. Ele é configurado através de um `Dockerfile` que define as variáveis de ambiente para o usuário e a senha do administrador, além de expor a porta padrão `27017`.
 
-```bash
-npm install
-npm start
+**Dockerfile** (MongoDB):
+```dockerfile
+FROM mongo:latest
+
+ENV MONGO_INITDB_ROOT_USERNAME=admin 
+ENV MONGO_INITDB_ROOT_PASSWORD=admin
+
+EXPOSE 27017
 ```
 
+Explicação:
+- **Imagem Base**: Utiliza a imagem oficial do MongoDB.
+- **Variáveis de Ambiente**: Define o nome de usuário e senha para o administrador do banco.
+- **Exposição da Porta**: Expõe a porta padrão do MongoDB (`27017`) para que o banco de dados possa ser acessado externamente.
 
+### PostgreSQL
 
+O PostgreSQL é um banco de dados relacional utilizado para armazenar dados estruturados. Ele é configurado através de um `Dockerfile`, onde são definidas as variáveis de ambiente para o usuário, senha e banco de dados, além de expor a porta `5432`.
+
+**Dockerfile** (PostgreSQL):
+```dockerfile
+FROM postgres:latest
+
+ENV POSTGRES_USER=admin
+ENV POSTGRES_PASSWORD=admin
+ENV POSTGRES_DB=satisfacao
+
+EXPOSE 5432
+```
+
+Explicação:
+- **Imagem Base**: Utiliza a imagem oficial do PostgreSQL.
+- **Variáveis de Ambiente**: Define o nome de usuário, senha e o banco de dados padrão.
+- **Exposição da Porta**: Expõe a porta padrão do PostgreSQL (`5432`).
+
+### Node.js
+
+A aplicação Node.js é o backend do projeto. O `Dockerfile` configura o Node.js, instala as dependências do `package.json` e expõe a porta `3000` para acessar a aplicação.
+
+**Dockerfile** (Node.js):
+```dockerfile
+FROM node:latest
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 3000
+
+CMD ["npm", "start"]
+```
+
+Explicação:
+- **Imagem Base**: Utiliza a imagem oficial do Node.js.
+- **Instalação de Dependências**: Copia o `package.json` e instala as dependências com `npm`.
+- **Exposição da Porta**: Expõe a porta `3000` para acessar a aplicação web.
+
+### Docker Compose
+
+O `docker-compose.yml` orquestra os containers do MongoDB, PostgreSQL e Node.js. Ele define as variáveis de ambiente, as portas expostas e a dependência entre os serviços.
+
+**docker-compose.yml**:
+```yaml
+version: '3'
+
+services:
+  db:
+    build: ./PostgreSQL
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: satisfacao
+    ports:
+      - "5432:5432"
+    networks:
+      - sistema-network
+
+  mongo:
+    build: ./MongoDB
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - "27017:27017"
+    networks:
+      - sistema-network
+
+  node:
+    build: ./Node-app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - mongo
+    networks:
+      - sistema-network
+    volumes:
+      - ./Node-app:/app
+
+networks:
+  sistema-network:
+    driver: bridge
+```
