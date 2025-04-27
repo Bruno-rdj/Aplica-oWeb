@@ -1,9 +1,9 @@
-# **TF - Matéria: Banco de Dados - Professor Gustavo**
+## **TF - Matéria: Banco de Dados - Professor Gustavo**
 Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizamos operações de inserção, consulta, atualização e exclusão de dados em MongoDB. A atividade incluiu o uso de comandos como insertMany, find, updateOne e deleteOne, com foco na manipulação de coleções de clientes, processos e eventos.
 
-**Exercício 1: Inserindo Dados**
+## **Exercício 1: Inserindo Dados**
 
-1. **Clientes**
+### 1. **Clientes**
    Para inserir dados na coleção de clientes, use o seguinte comando:
    ```javascript
    db.client.insertMany([
@@ -38,7 +38,7 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
    ]);
    ```
 
-2. **Processos**
+### 2. **Processos**
    Para registrar os processos relacionados aos clientes na coleção `client_processes`, utilize:
    ```javascript
    db.client_processes.insertMany([
@@ -63,7 +63,7 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
    ]);
    ```
 
-3. **Eventos**
+### 3. **Eventos**
    Para inserir eventos relacionados aos clientes, utilize:
    ```javascript
    db.events.insertMany([
@@ -108,27 +108,27 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
 
 ---
 
-**Exercício 2: Consultando Dados**
+## **Exercício 2: Consultando Dados**
 
-1. **Clientes em São Paulo**  
+### 1. **Clientes em São Paulo**  
    Para listar todos os clientes que estão na cidade de São Paulo, utilize:
    ```javascript
    db.client.find({city: {$eq: "São Paulo"}});
    ```
 
-2. **Processos com Valor Superior a 2000**  
+### 2. **Processos com Valor Superior a 2000**  
    Para listar os processos cujo valor é superior a 2000, utilize:
    ```javascript
    db.client_processes.find({value: {$gt: 2000.0}});
    ```
 
-3. **Eventos com Proposta Pendente ou Aceita**  
+### 3. **Eventos com Proposta Pendente ou Aceita**  
    Para encontrar os eventos com status de proposta "pending accepted" ou "accepted", utilize:
    ```javascript
    db.events.find({proposal_status: {$in: ["pending accepted", "accepted"]}});
    ```
 
-4. **Clientes Corporativos**  
+### 4. **Clientes Corporativos**  
    Para listar clientes corporativos (onde o campo `enterprise` não é nulo) e exibir apenas o nome e o CNPJ, use:
    ```javascript
    db.client.find(
@@ -137,7 +137,7 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
    );
    ```
 
-5. **Processos de Cobrança**  
+### 5. **Processos de Cobrança**  
    Para listar processos da classe "Cobrança" e ordená-los por valor de forma decrescente, utilize:
    ```javascript
    db.client_processes.find({class: "Cobrança"}).sort({value: -1});
@@ -145,9 +145,9 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
 
 ---
 
-**Exercício 3: Atualizando Dados**
+## **Exercício 3: Atualizando Dados**
 
-1. **Atualizar Status do Processo**  
+### 1. **Atualizar Status do Processo**  
    Para alterar o status do processo com o número "PROC-2023-001" para "concluído", use:
    ```javascript
    db.client_processes.updateOne(
@@ -156,7 +156,7 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
    );
    ```
 
-2. **Adicionar Observação ao Evento**  
+### 2. **Adicionar Observação ao Evento**  
    Para adicionar a observação "OBS-MS-001.txt" ao evento de Maria Silva, utilize:
    ```javascript
    db.events.updateOne(
@@ -165,7 +165,7 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
    );
    ```
 
-3. **Incrementar Quantidade de Limpezas**  
+### 3. **Incrementar Quantidade de Limpezas**  
    Para aumentar em 1 o número de limpezas para a Empresa Soluções Ltda, use:
    ```javascript
    db.events.updateOne(
@@ -176,15 +176,15 @@ Atividade prática desenvolvida para a matéria de Banco de Dados, onde realizam
 
 ---
 
-**Exercício 4: Excluindo Dados**
+## **Exercício 4: Excluindo Dados**
 
-1. **Remover Processo**  
+### 1. **Remover Processo**  
    Para excluir o processo com número "PROC-2023-002", use:
    ```javascript
    db.client_processes.deleteOne({number: "PROC-2023-002"});
    ```
 
-2. **Visualizar Índices**  
+### 2. **Visualizar Índices**  
    Para listar todos os índices da coleção `client`, utilize:
    ```javascript
    db.client.getIndexes();
