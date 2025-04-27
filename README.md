@@ -1,10 +1,9 @@
 # **Aplica-oWeb (Projeto Docker - MongoDB, PostgreSQL e Node.js)**
 
-Este repositório contém a configuração de um ambiente Docker para rodar os serviços **MongoDB**, **PostgreSQL** e **Node.js**. O objetivo deste projeto é fornecer uma maneira simples e eficiente de rodar esses três serviços em containers Docker, com a capacidade de configurar credenciais administrativas e bancos de dados iniciais durante a criação dos containers.
+## **TF - Matéria: Implementação de Servidores - Professor Alexandre**
+Atividade sobre configuração e orquestração de um ambiente Docker para os serviços MongoDB, PostgreSQL e Node.js. O projeto inclui a criação de containers para cada serviço, com credenciais administrativas e bancos de dados iniciais, utilizando Dockerfiles e docker-compose.yml para orquestração dos containers.
 
-A configuração é feita por meio de **Dockerfiles** para cada serviço e um arquivo **docker-compose.yml** que orquestra os containers, garantindo um ambiente consistente e facilmente replicável em diferentes máquinas e plataformas.
-
-## 🛠️ Tecnologias e Ferramentas
+## Tecnologias e Ferramentas
 
 - **Docker**: Utilizado para containerizar os serviços, garantindo que o ambiente de execução seja isolado e idêntico em qualquer máquina.
 - **Docker Compose**: Ferramenta para orquestrar múltiplos containers Docker, facilitando a configuração e execução de múltiplos serviços.
@@ -12,7 +11,7 @@ A configuração é feita por meio de **Dockerfiles** para cada serviço e um ar
 - **PostgreSQL**: Banco de dados relacional de código aberto utilizado para armazenar dados estruturados e permitir consultas SQL.
 - **Node.js**: Ambiente de execução JavaScript do lado do servidor, usado para rodar a aplicação web.
 
-## 🚀 Como rodar o projeto
+## Como rodar o projeto
 
 ### Pré-requisitos
 
@@ -63,7 +62,7 @@ docker-compose down
 
 ---
 
-## 🧩 Estrutura do Projeto
+## Estrutura do Projeto
 
 O projeto é composto pelos seguintes diretórios e arquivos:
 
@@ -85,7 +84,7 @@ Projeto-Docker-MongoDB-PostgreSQL-Node/
 
 ---
 
-## ⚙️ Detalhes de cada serviço
+## Detalhes de cada serviço
 
 ### MongoDB
 
