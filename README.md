@@ -35,6 +35,7 @@ Caso o Docker não esteja instalado, siga as instruções para instalação na d
 
 ```bash
 git clone https://github.com/seu-usuario/Projeto-Docker-MongoDB-PostgreSQL-Node.git
+
 cd Projeto-Docker-MongoDB-PostgreSQL-Node
 ```
 
