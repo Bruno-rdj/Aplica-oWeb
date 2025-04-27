@@ -1,37 +1,49 @@
+# Define os serviços que serão executados
 services:
-  db:
-    build: ./PostgreSQL
+  # Serviço para o banco de dados PostgreSQL
+  postgres:
+    # Define o caminho para o Dockerfile do PostgreSQL
+    build:
+      context: ./docker/postgres
+    # Define as variáveis de ambiente para configurar o PostgreSQL
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: satisfacao
-    ports:
-      - "5432:5432"
+      POSTGRES_USER: admin  # Nome de usuário administrativo do banco de dados
+      POSTGRES_PASSWORD: admin_password  # Senha do usuário administrativo
+      POSTGRES_DB: satisfaction_survey  # Nome do banco de dados que será criado automaticamente
+    # Define a rede na qual o serviço estará conectado
     networks:
-      - sistema-network
+      - survey-network
 
-  mongo:
-    build: ./MongoDB
+  # Serviço para o banco de dados MongoDB
+  mongodb:
+    # Define o caminho para o Dockerfile do MongoDB
+    build:
+      context: ./docker/mongodb
+    # Define as variáveis de ambiente para configurar o MongoDB
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-    ports:
-      - "27017:27017"
+      MONGO_INITDB_ROOT_USERNAME: admin  # Nome de usuário administrativo do MongoDB
+      MONGO_INITDB_ROOT_PASSWORD: admin_password  # Senha do usuário administrativo
+    # Define a rede na qual o serviço estará conectado
     networks:
-      - sistema-network
+      - survey-network
 
-  node:
-    build: ./Node-app
+  # Serviço para a aplicação Node.js
+  nodejs:
+    # Define o caminho para o Dockerfile do Node.js
+    build:
+      context: ./docker/nodejs
+    # Mapeia a porta 3000 do container para a porta 3000 do host
     ports:
       - "3000:3000"
+    # Define dependências para garantir que o Node.js só inicie após PostgreSQL e MongoDB estarem prontos
     depends_on:
-      - db
-      - mongo
+      - postgres
+      - mongodb
+    # Define a rede na qual o serviço estará conectado
     networks:
-      - sistema-network
-    volumes:
-      - ./Node-app:/app
+      - survey-network
 
+# Define a rede Docker que será usada pelos serviços
 networks:
-  sistema-network:
-    driver: bridge
+  survey-network:
+    driver: bridge  # Usa o driver de rede "bridge" para comunicação entre os containers

@@ -3,7 +3,7 @@ FROM mongo:latest
 
 # Define variáveis de ambiente para o MongoDB
 ENV MONGO_INITDB_ROOT_USERNAME=admin
-ENV MONGO_INITDB_ROOT_PASSWORD=admin
+ENV MONGO_INITDB_ROOT_PASSWORD=adminpassword
 
 # Expõe a porta padrão do MongoDB para conexões externas
 EXPOSE 27017

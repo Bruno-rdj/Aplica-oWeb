@@ -1,11 +1,15 @@
-# Usa a imagem oficial do PostgreSQL como base
+# Usa a imagem oficial mais recente do PostgreSQL como base
 FROM postgres:latest
 
-# Define variáveis de ambiente para configurar o banco de dados
+# Define o nome de usuário administrativo do banco de dados
 ENV POSTGRES_USER=admin
-ENV POSTGRES_PASSWORD=admin
-ENV POSTGRES_DB=satisfacao
 
-# Expõe a porta padrão do PostgreSQL
+# Define a senha do usuário administrativo
+ENV POSTGRES_PASSWORD=admin_password
+
+# Define o nome do banco de dados que será criado automaticamente na inicialização
+ENV POSTGRES_DB=satisfaction_survey
+
+# Expõe a porta padrão do PostgreSQL (5432) para permitir conexões externas
 EXPOSE 5432
 
