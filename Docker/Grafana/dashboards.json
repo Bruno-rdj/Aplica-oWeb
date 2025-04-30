@@ -1,0 +1,79 @@
+{
+    "annotations": {
+      "title": "Example Dashboard",
+      "tags": ["example", "dashboard"],
+      "timezone": "browser",
+      "panels": [
+        {
+          "type": "graph",
+          "title": "PostgreSQL Connections",
+          "targets": [
+            {
+              "target": "pg_stat_activity_count",
+              "refId": "A"
+            }
+          ],
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": "Connections",
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "min": null,
+              "max": null,
+              "show": true
+            }
+          ],
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "stack": false,
+          "legend": {
+            "show": true
+          }
+        },
+        {
+          "type": "table",
+          "title": "Top Queries",
+          "targets": [
+            {
+              "target": "pg_stat_statements",
+              "refId": "B"
+            }
+          ],
+          "columns": [
+            {
+              "text": "Query",
+              "value": "query"
+            },
+            {
+              "text": "Calls",
+              "value": "calls"
+            },
+            {
+              "text": "Total Time",
+              "value": "total_time"
+            }
+          ],
+          "pageSize": 10,
+          "showHeader": true
+        }
+      ],
+      "schemaVersion": 16,
+      "version": 1
+    }
+  }

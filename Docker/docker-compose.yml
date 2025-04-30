@@ -1,49 +1,67 @@
-# Define os serviços que serão executados
+version: '3.8'
+
 services:
   # Serviço para o banco de dados PostgreSQL
   postgres:
-    # Define o caminho para o Dockerfile do PostgreSQL
-    build:
-      context: ./docker/postgres
-    # Define as variáveis de ambiente para configurar o PostgreSQL
+    build: ./PostgreSQL
     environment:
-      POSTGRES_USER: admin  # Nome de usuário administrativo do banco de dados
-      POSTGRES_PASSWORD: admin_password  # Senha do usuário administrativo
-      POSTGRES_DB: satisfaction_survey  # Nome do banco de dados que será criado automaticamente
-    # Define a rede na qual o serviço estará conectado
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin_password
+      POSTGRES_DB: satisfaction_survey
     networks:
       - survey-network
 
   # Serviço para o banco de dados MongoDB
   mongodb:
-    # Define o caminho para o Dockerfile do MongoDB
-    build:
-      context: ./docker/mongodb
-    # Define as variáveis de ambiente para configurar o MongoDB
+    build: ./MongoDB
     environment:
-      MONGO_INITDB_ROOT_USERNAME: admin  # Nome de usuário administrativo do MongoDB
-      MONGO_INITDB_ROOT_PASSWORD: admin_password  # Senha do usuário administrativo
-    # Define a rede na qual o serviço estará conectado
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin_password
     networks:
       - survey-network
 
   # Serviço para a aplicação Node.js
-  nodejs:
-    # Define o caminho para o Dockerfile do Node.js
-    build:
-      context: ./docker/nodejs
-    # Mapeia a porta 3000 do container para a porta 3000 do host
-    ports:
-      - "3000:3000"
-    # Define dependências para garantir que o Node.js só inicie após PostgreSQL e MongoDB estarem prontos
-    depends_on:
-      - postgres
-      - mongodb
-    # Define a rede na qual o serviço estará conectado
-    networks:
-      - survey-network
+  # nodejs:
+  #   build: ./Node-app
+  #   ports:
+  #     - "3000:3000"
+  #   depends_on:
+  #     - postgres
+  #     - mongodb
+  #   networks:
+  #     - survey-network
 
-# Define a rede Docker que será usada pelos serviços
+  # Serviço para o exportador de métricas do PostgreSQL
+  postgres-exporter:  
+    build: ./postgres-exporter  
+    environment:  
+      DATA_SOURCE_NAME: "admin:admin_password@postgres:5432/satisfaction_survey"  # Corrigir string de conexão
+    networks:
+      - observability-network  
+    ports:
+      - "9187:9187"  
+
+  # Serviço para o Prometheus
+  prometheus:  
+    build: ./Prometheus  
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml  
+    networks:
+      - observability-network  
+    ports:
+      - "9090:9090"  
+
+  # Serviço para o Grafana
+  grafana:  
+    build: ./Grafana  
+    networks:
+      - observability-network  
+    ports:
+      - "3000:3000"  
+
+# Define as redes Docker
 networks:
   survey-network:
-    driver: bridge  # Usa o driver de rede "bridge" para comunicação entre os containers
+    driver: bridge
+  observability-network:
+    driver: bridge
