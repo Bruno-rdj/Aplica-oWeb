@@ -1,4 +1,4 @@
-# **Aplica-oWeb - Sistema de Pesquisa de Satisfação **
+# Aplica-oWeb - Sistema de Pesquisa de Satisfação 
 
 Este projeto consiste em uma aplicação web desenvolvida com o objetivo de coletar a opinião dos alunos do curso de Análise e Desenvolvimento de Sistemas por meio de pesquisas de satisfação. Para garantir um ambiente de desenvolvimento padronizado e facilmente replicável, a aplicação foi containerizada com Docker.
 
@@ -57,7 +57,7 @@ Aplica-oWeb/Docker
 
 ## Como executar o projeto com Docker Compose
 
-Siga os passos abaixo para rodar a aplicação utilizando Docker Compose em sua máquina local:
+Siga os passos abaixo para rodar a aplicação utilizando Docker Compose em ambiente local:
 
 ---
 
@@ -88,11 +88,11 @@ Se ainda não tiver o Docker e o Docker Compose instalados, siga as instruções
 - [Instalar Docker](https://docs.docker.com/get-docker/)
 - [Instalar Docker Compose](https://docs.docker.com/compose/install/)
 
-Após a instalação do Docker, verefique se tudo está funcionando corretamente dando os seguintes comandos: `docker --version` e o `docker-compose -- version`.
+Após a instalação do Docker, verifique se tudo está funcionando corretamente dando os seguintes comandos: `docker --version` e o `docker-compose -- version`.
 
 ---
 
-### **3. Finalize containers existentes (se caso houver)**
+### **3. Finalize containers existentes (se houver)**
 
 Antes de iniciar o projeto, pare e remova qualquer container em execução:
 
@@ -134,7 +134,7 @@ Após a inicialização, os serviços estarão disponíveis nos seguintes endere
 
 * O PostgreSQL estará rodando na porta 5432, e você pode conectar-se a ele com as credenciais definidas no docker-compose.yml.
 
----
+
 
 
 
