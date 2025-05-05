@@ -1,21 +1,81 @@
-# **Aplica-oWeb (Projeto Docker - MongoDB, PostgreSQL e Node.js)**
+# **Aplica-oWeb - Sistema de Pesquisa de Satisfação **
 
-## **TF - Matéria: Implementação de Servidores - Professor Alexandre**
-Atividade sobre configuração e orquestração de um ambiente Docker para os serviços MongoDB, PostgreSQL e Node.js. O projeto inclui a criação de containers para cada serviço, com credenciais administrativas e bancos de dados iniciais, utilizando Dockerfiles e docker-compose.yml para orquestração dos containers.
+Este projeto consiste em uma aplicação web desenvolvida com o objetivo de coletar a opinião dos alunos do curso de Análise e Desenvolvimento de Sistemas por meio de pesquisas de satisfação. Para garantir um ambiente de desenvolvimento padronizado e facilmente replicável, a aplicação foi containerizada com Docker.
 
-## Tecnologias e Ferramentas
+## Estrutura do Projeto
+
+O projeto é composto pelos seguintes diretórios e arquivos:
+
+---
+```plaintext
+Aplica-oWeb/Docker
+│
+├── Grafana/                         # Container do Grafana
+│   ├── Dashboards/                  # Dashboard customizado para o Grafana
+│   │   └── Dockerfile
+│   ├── dashboards.json              # Configuração dos dashboards
+│
+├── MongoDB/                         # Container do MongoDB
+│   ├── Dockerfile
+│   └── README.md
+│
+├── Node-app/                        # Aplicação Node.app
+│   ├── src/                         # Código-fonte da aplicação
+│   │   └── app.js
+│   │   └── package.json
+│   ├── Dockerfile
+│   └── README.md
+│
+├── Postgres-Exporter/              # Exportador de métricas do PostgreSQL
+│   └── Dockerfile
+│
+├── PostgreSQL/                     # Container do PostgreSQL
+│   ├── Dockerfile
+│   └── README.md
+│
+├── Prometheus/                     # Container do Prometheus
+│   ├── Dockerfile
+│   └── prometheus.yml              # Configuração do Prometheus
+│
+├── docker-compose.yml              # Orquestração dos containers
+└── README.md                       # Documentação geral do projeto
+```
+---
+
+## O projeto consiste nos seguintes componentes principais:
 
 - **Docker**: Utilizado para containerizar os serviços, garantindo que o ambiente de execução seja isolado e idêntico em qualquer máquina.
 - **Docker Compose**: Ferramenta para orquestrar múltiplos containers Docker, facilitando a configuração e execução de múltiplos serviços.
 - **MongoDB**: Banco de dados NoSQL de código aberto utilizado para armazenar dados não-relacionais.
 - **PostgreSQL**: Banco de dados relacional de código aberto utilizado para armazenar dados estruturados e permitir consultas SQL.
-- **Node.js**: Ambiente de execução JavaScript do lado do servidor, usado para rodar a aplicação web.
+- **Node.app**: Ambiente de execução JavaScript do lado do servidor, usado para rodar a aplicação web.
+- **Prometheus**: Ferramenta de monitoramento e coleta de métricas open-source, utilizada para armazenar e consultar dados de desempenho dos serviços em tempo real.
+- **Postgres Exporter**: Exportador de métricas específico para PostgreSQL, usado em conjunto com o Prometheus para coletar estatísticas do banco de dados.
+- **Grafana**: Plataforma de visualização e análise de métricas, usada para criar dashboards interativos e acompanhar o desempenho da aplicação e seus componentes em tempo real.
 
-## Como rodar o projeto
+---
 
-### Pré-requisitos
+## Como executar o projeto com Docker Compose
 
-Antes de começar, você precisa ter o **Docker** e o **Docker Compose** instalados em sua máquina. Você pode verificar se o Docker está instalado corretamente com os seguintes comandos:
+Siga os passos abaixo para rodar a aplicação utilizando Docker Compose em sua máquina local:
+
+---
+
+### **1. Clone o repositório**
+
+Clone o projeto para o seu computador:
+
+```bash
+git clone https://github.com/Bruno-rdj/Aplica-oWeb.git
+
+cd Aplica-oWeb
+```
+
+---
+
+### **2. Verifique se o Docker e o Docker Compose estão instalados**
+
+Execute os comandos abaixo para garantir que as ferramentas estão instaladas corretamente:
 
 ```bash
 docker --version
@@ -23,38 +83,18 @@ docker --version
 docker-compose --version
 ```
 
-Caso o Docker não esteja instalado, siga as instruções para instalação na documentação oficial:
+Se ainda não tiver o Docker e o Docker Compose instalados, siga as instruções oficiais de instalação:
 
 - [Instalar Docker](https://docs.docker.com/get-docker/)
 - [Instalar Docker Compose](https://docs.docker.com/compose/install/)
 
-## Passos para executar o projeto
+Após a instalação do Docker, verefique se tudo está funcionando corretamente dando os seguintes comandos: `docker --version` e o `docker-compose -- version`.
 
-### 1. **Clone o repositório** para sua máquina local:
+---
 
-```bash
-git clone https://github.com/seu-usuario/Projeto-Docker-MongoDB-PostgreSQL-Node.git
+### **3. Finalize containers existentes (se caso houver)**
 
-cd Projeto-Docker-MongoDB-PostgreSQL-Node
-```
-
-### 2. **Construa e inicie os containers** com o Docker Compose:
-
-```bash
-docker-compose up --build
-```
-
-Esse comando vai construir as imagens Docker a partir dos `Dockerfile`s em cada diretório e iniciar os containers dos serviços.
-
-### 3. **Acesse os serviços**:
-
-- O **Node.js** estará rodando na porta `3000`, e você pode acessar a aplicação web através de `http://localhost:3000`.
-- O **MongoDB** estará rodando na porta `27017`, e você pode conectar-se a ele com as credenciais definidas no `docker-compose.yml`.
-- O **PostgreSQL** estará rodando na porta `5432`, e você pode conectar-se a ele com as credenciais definidas no `docker-compose.yml`.
-
-### 4. **Parar os containers**:
-
-Se você precisar parar os containers, basta executar o seguinte comando:
+Antes de iniciar o projeto, pare e remova qualquer container em execução:
 
 ```bash
 docker-compose down
@@ -62,138 +102,39 @@ docker-compose down
 
 ---
 
-## Estrutura do Projeto
+### **4. (Opcional) Remova o volume de dados do PostgreSQL**
 
-O projeto é composto pelos seguintes diretórios e arquivos:
+Se necessário, remova os dados persistentes do PostgreSQL para iniciar do zero:
 
-```plaintext
-Projeto-Docker-MongoDB-PostgreSQL-Node/
-│
-├── MongoDB/             # Dockerfile para o MongoDB
-│   └── Dockerfile
-│
-├── Node-app/            # Dockerfile para a aplicação Node.js
-│   └── Dockerfile
-│
-├── PostgreSQL/          # Dockerfile para o PostgreSQL
-│   └── Dockerfile
-│
-├── docker-compose.yml   # Arquivo de orquestração dos containers
-└── README.md            # Documentação do projeto
+```bash
+docker volume rm AulaMicroservico_postgres_data
 ```
 
 ---
 
-## Detalhes de cada serviço
+### **5. Construa e inicie os containers com Docker Compose**
 
-### MongoDB
+No diretório raiz do projeto, execute:
 
-O MongoDB é um banco de dados NoSQL utilizado para armazenar dados não-relacionais. Ele é configurado através de um `Dockerfile` que define as variáveis de ambiente para o usuário e a senha do administrador, além de expor a porta padrão `27017`.
-
-**Dockerfile** (MongoDB):
-```dockerfile
-FROM mongo:latest
-
-ENV MONGO_INITDB_ROOT_USERNAME=admin 
-ENV MONGO_INITDB_ROOT_PASSWORD=admin
-
-EXPOSE 27017
+```bash
+docker-compose up --build
 ```
 
-Explicação:
-- **Imagem Base**: Utiliza a imagem oficial do MongoDB.
-- **Variáveis de Ambiente**: Define o nome de usuário e senha para o administrador do banco.
-- **Exposição da Porta**: Expõe a porta padrão do MongoDB (`27017`) para que o banco de dados possa ser acessado externamente.
+Esse comando irá **construir as imagens** e iniciar os containers definidos no arquivo `docker-compose.yml`.
 
-### PostgreSQL
+---
 
-O PostgreSQL é um banco de dados relacional utilizado para armazenar dados estruturados. Ele é configurado através de um `Dockerfile`, onde são definidas as variáveis de ambiente para o usuário, senha e banco de dados, além de expor a porta `5432`.
+### **6. Acesse a aplicação**
 
-**Dockerfile** (PostgreSQL):
-```dockerfile
-FROM postgres:latest
+Após a inicialização, os serviços estarão disponíveis nos seguintes endereços:
 
-ENV POSTGRES_USER=admin
-ENV POSTGRES_PASSWORD=admin
-ENV POSTGRES_DB=satisfacao
+* O Node.js estará rodando na porta 3000, e você pode acessar a aplicação web através de http://localhost:3000.
 
-EXPOSE 5432
-```
+* O MongoDB estará rodando na porta 27017, e você pode conectar-se a ele com as credenciais definidas no docker-compose.yml.
 
-Explicação:
-- **Imagem Base**: Utiliza a imagem oficial do PostgreSQL.
-- **Variáveis de Ambiente**: Define o nome de usuário, senha e o banco de dados padrão.
-- **Exposição da Porta**: Expõe a porta padrão do PostgreSQL (`5432`).
+* O PostgreSQL estará rodando na porta 5432, e você pode conectar-se a ele com as credenciais definidas no docker-compose.yml.
 
-### Node.js
+---
 
-A aplicação Node.js é o backend do projeto. O `Dockerfile` configura o Node.js, instala as dependências do `package.json` e expõe a porta `3000` para acessar a aplicação.
 
-**Dockerfile** (Node.js):
-```dockerfile
-FROM node:latest
 
-WORKDIR /app
-
-COPY package.json .
-
-RUN npm install
-
-COPY . .
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
-```
-
-Explicação:
-- **Imagem Base**: Utiliza a imagem oficial do Node.js.
-- **Instalação de Dependências**: Copia o `package.json` e instala as dependências com `npm`.
-- **Exposição da Porta**: Expõe a porta `3000` para acessar a aplicação web.
-
-### Docker Compose
-
-O `docker-compose.yml` orquestra os containers do MongoDB, PostgreSQL e Node.js. Ele define as variáveis de ambiente, as portas expostas e a dependência entre os serviços.
-
-**docker-compose.yml**:
-```yaml
-version: '3'
-
-services:
-  db:
-    build: ./PostgreSQL
-    environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
-      POSTGRES_DB: satisfacao
-    ports:
-      - "5432:5432"
-    networks:
-      - sistema-network
-
-  mongo:
-    build: ./MongoDB
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: admin
-    ports:
-      - "27017:27017"
-    networks:
-      - sistema-network
-
-  node:
-    build: ./Node-app
-    ports:
-      - "3000:3000"
-    depends_on:
-      - db
-      - mongo
-    networks:
-      - sistema-network
-    volumes:
-      - ./Node-app:/app
-
-networks:
-  sistema-network:
-    driver: bridge
-```
