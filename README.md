@@ -6,7 +6,6 @@ Este projeto consiste em uma aplicação web desenvolvida com o objetivo de cole
 
 O projeto é composto pelos seguintes diretórios e arquivos:
 
----
 ```plaintext
 Aplica-oWeb/Docker
 │
@@ -45,12 +44,19 @@ Aplica-oWeb/Docker
 ## O projeto consiste nos seguintes componentes principais:
 
 - **Docker**: Utilizado para containerizar os serviços, garantindo que o ambiente de execução seja isolado e idêntico em qualquer máquina.
+  
 - **Docker Compose**: Ferramenta para orquestrar múltiplos containers Docker, facilitando a configuração e execução de múltiplos serviços.
+  
 - **MongoDB**: Banco de dados NoSQL de código aberto utilizado para armazenar dados não-relacionais.
+  
 - **PostgreSQL**: Banco de dados relacional de código aberto utilizado para armazenar dados estruturados e permitir consultas SQL.
+  
 - **Node.app**: Ambiente de execução JavaScript do lado do servidor, usado para rodar a aplicação web.
+  
 - **Prometheus**: Ferramenta de monitoramento e coleta de métricas open-source, utilizada para armazenar e consultar dados de desempenho dos serviços em tempo real.
+  
 - **Postgres Exporter**: Exportador de métricas específico para PostgreSQL, usado em conjunto com o Prometheus para coletar estatísticas do banco de dados.
+  
 - **Grafana**: Plataforma de visualização e análise de métricas, usada para criar dashboards interativos e acompanhar o desempenho da aplicação e seus componentes em tempo real.
 
 ---
@@ -58,8 +64,6 @@ Aplica-oWeb/Docker
 ## Como executar o projeto com Docker Compose
 
 Siga os passos abaixo para rodar a aplicação utilizando Docker Compose em ambiente local:
-
----
 
 ### **1. Clone o repositório**
 
